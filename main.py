@@ -11,7 +11,7 @@ if rank == 0:
     dist.broadcast_object_list(objects, 0)
 else:
     objects = [None]
-    dist.broadcast_object_list(objects, 0)    
+    dist.broadcast_object_list(objects, 0)
 
 for i in range(size):
     if rank == i:
