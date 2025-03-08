@@ -2,7 +2,7 @@ import torch
 import torch.distributed as dist
 import datetime
 
-dist.init_process_group("gloo", timeout=datetime.timedelta(seconds=1))
+dist.init_process_group("gloo", timeout=datetime.timedelta(seconds=10))
 rank = dist.get_rank()
 size = dist.get_world_size()
 

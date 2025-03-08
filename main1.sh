@@ -1,1 +1,3 @@
-mpiexec -n 2 torchrun --nnodes 2 --node-rank 1 main.py --master-addr localhost &
+mpiexec.openmpi -n 4 \
+		sh -euc '
+torchrun --nnodes $OMPI_COMM_WORLD_SIZE --node-rank $OMPI_COMM_WORLD_RANK main.py'
