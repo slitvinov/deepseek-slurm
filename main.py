@@ -10,14 +10,19 @@ size = dist.get_world_size()
 
 if rank == 0:
     objects = [42, [1, 2, 3, 4]]
-    x = torch.tensor([10, 20], dtype=float)
     dist.broadcast_object_list(objects, 0)
-    dist.broadcast(x, 0)
 else:
     objects = [None, None]
-    x = torch.empty(2, dtype=float)
     dist.broadcast_object_list(objects, 0)
-    dist.broadcast(x, 0)
+
+if rank == 0:
+    x = torch.tensor(123, dtype=float)
+    dist.send(x, 1)
+elif rank == 1:
+    x = torch.empty(1, dtype=float)
+    dist.recv(x, 0)
+else:
+    x = None
 
 for i in range(size):
     if rank == i:
