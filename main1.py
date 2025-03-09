@@ -4,6 +4,7 @@ import torch.distributed.elastic.multiprocessing.errors
 import datetime
 import platform
 
+
 @dist.elastic.multiprocessing.errors.record
 def main():
     dist.init_process_group(timeout=datetime.timedelta(seconds=10))
@@ -28,6 +29,7 @@ def main():
                   torch.cuda.get_device_properties().uuid, *objects, x)
         dist.barrier()
     dist.destroy_process_group()
+
 
 if __name__ == '__main__':
     main()
