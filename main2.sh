@@ -7,4 +7,4 @@ srun "$@" sh -xeuc '
        --nnodes $SLURM_NNODES \
        --node-rank $SLURM_NODEID \
        --nproc-per-node gpu \
-       main.py'
+       main1.py'
