@@ -2,7 +2,7 @@
 # sh main2.sh --jobid 6022877
 master_addr=`srun "$@" sh -xeuc 'if test $SLURM_PROCID -eq 0; then hostname; fi'`
 srun "$@" sh -xeuc '
-python ~/.local/bin/torchrun \
+     torchrun \
        --master-addr '$master_addr' \
        --nnodes $SLURM_NNODES \
        --node-rank $SLURM_NODEID \
