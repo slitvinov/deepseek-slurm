@@ -1,20 +1,24 @@
 import torch
 import torch.distributed as dist
 import datetime
+import platform
 
-dist.init_process_group("gloo", timeout=datetime.timedelta(seconds=10))
+dist.init_process_group(timeout=datetime.timedelta(seconds=10))
+local_rank = dist.get_node_local_rank()
+node = platform.node()
 rank = dist.get_rank()
 size = dist.get_world_size()
+torch.cuda.set_device(local_rank)
 
 if rank == 0:
-    objects = [42]
+    objects = [42, [1, 2, 3, 4]]
     dist.broadcast_object_list(objects, 0)
 else:
-    objects = [None]
+    objects = [None, None]
     dist.broadcast_object_list(objects, 0)
 
 for i in range(size):
     if rank == i:
-        print(rank, size, *objects)
+        print(rank, local_rank, node, torch.cuda.get_device_properties().uuid, *objects)
     dist.barrier()
 dist.destroy_process_group()
