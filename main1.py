@@ -19,6 +19,7 @@ else:
 
 for i in range(size):
     if rank == i:
-        print(rank, local_rank, node, torch.cuda.get_device_properties().uuid, *objects)
+        print(rank, local_rank, node,
+              torch.cuda.get_device_properties().uuid, *objects)
     dist.barrier()
 dist.destroy_process_group()
