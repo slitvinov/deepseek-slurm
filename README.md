@@ -12,7 +12,7 @@ In batch
 ```
 module load python/3.12.5-fasrc01
 srun -p seas_gpu --gpus-per-node 2 --mem 20Gb sh -c '
-mamba run --no-capture-output -n env python <<!
+mamba run --no-capture-output -n torch python <<!
 import torch
 if torch.cuda.is_available():
    for i in range(torch.cuda.device_count()):
@@ -42,4 +42,21 @@ if torch.cuda.is_available():
 else:
    print("CUDA is not available")
 !
+```
+
+## Check connectivity
+
+```
+module load python/3.12.5-fasrc01
+sbatch -p seas_gpu --gpus-per-node 2 -N 2 --mem 40Gb --wrap '
+master_addr=`srun sh -xuc '\''if test $SLURM_PROCID -eq 0; then hostname; fi'\''`
+TORCH_DISTRIBUTED_DEBUG=INFO srun sh -xuc '\''mamba run -n torch torchrun \
+       --rdzv-backend static \
+       --master-addr '\''$master_addr'\'' \
+       --nnodes $SLURM_NNODES \
+       --node-rank $SLURM_NODEID \
+       --nproc-per-node gpu \
+       main1.py'\''
+!
+'
 ```
