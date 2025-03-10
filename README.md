@@ -50,7 +50,7 @@ else:
 module load python/3.12.5-fasrc01
 sbatch -p seas_gpu --gpus-per-node 2 -N 2 --mem 40Gb --wrap '
 master_addr=`srun sh -xuc '\''if test $SLURM_PROCID -eq 0; then hostname; fi'\''`
-TORCH_DISTRIBUTED_DEBUG=INFO srun sh -xuc '\''mamba run -n torch torchrun \
+TORCH_DISTRIBUTED_DEBUG=DETAIL srun sh -xuc '\''mamba run -n torch torchrun \
        --rdzv-backend static \
        --master-addr '\''$master_addr'\'' \
        --nnodes $SLURM_NNODES \
