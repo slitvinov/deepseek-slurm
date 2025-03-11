@@ -2,6 +2,7 @@ import torch
 import torch.distributed as dist
 import torch.distributed.elastic.multiprocessing.errors
 
+
 @dist.elastic.multiprocessing.errors.record
 def main():
     dist.init_process_group()
