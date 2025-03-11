@@ -38,4 +38,9 @@ PYTHONUNBUFFERED=1 srun -u sh -c '\''mamba run --no-capture-output -n torch torc
        --nproc-per-node gpu \
        main1.py'\''
 '
+$ cat out
+rank=0 size=4 local_rank=0 node='holygpu8a27401.rc.fas.harvard.edu' bd10c331-fad8-00d2-4636-71a35767624d, [42, [1, 2, 3, 4]], 123.0
+rank=1 size=4 local_rank=1 node='holygpu8a27401.rc.fas.harvard.edu' 197b3481-c4db-7cfd-b9b2-ca7fbb6ad66e, [42, [1, 2, 3, 4]], 123.0
+rank=2 size=4 local_rank=0 node='holygpu8a29201.rc.fas.harvard.edu' bf87ac69-1c93-9a19-24f4-8179938fc4f9, [42, [1, 2, 3, 4]], 123.0
+rank=3 size=4 local_rank=1 node='holygpu8a29201.rc.fas.harvard.edu' bdc0c1d7-cb4a-0f8c-b874-fcb0ba9ebdf3, [42, [1, 2, 3, 4]], 123.0
 ```

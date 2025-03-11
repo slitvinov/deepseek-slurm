@@ -26,7 +26,7 @@ def main():
         if rank == i:
             print(
                 f"{rank=} {size=} {local_rank=} {node=} "
-                f"{torch.cuda.get_device_properties().uuid}, {objects}, {tensor}\n"
+                f"{torch.cuda.get_device_properties().uuid}, {objects}, {tensor}"
             )
         dist.barrier()
     dist.destroy_process_group()
