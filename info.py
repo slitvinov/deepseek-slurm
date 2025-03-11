@@ -36,7 +36,7 @@ for name, meta in j.items():
         print(name, np.min(x), np.max(x), offsets[0], dtype)
         # print(name, dtype, shape, offsets[0])
 
-```
+'''
 from safetensors.torch import save
 import torch
 tensors = {
@@ -45,4 +45,4 @@ tensors = {
 }
 with open("info.safetensors", "wb") as f:
     f.write(save(tensors))
-```
+'''
