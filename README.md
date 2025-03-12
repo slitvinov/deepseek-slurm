@@ -25,6 +25,8 @@ NVIDIA A100-SXM4-80GB; 79Gb; fbf548fc-e161-1853-0d59-2c12f84acf7e
 
 ## Check connectivity
 
+Set `TORCH_LOGS=+distributed,+dist_c10d` for more info.
+
 ```
 $ module load python/3.12.5-fasrc01
 $ sbatch -p seas_gpu --gpus-per-node 2 -N 2 --mem 20Gb -o out -e err --wrap '
